@@ -2,4 +2,8 @@
 !LICENSE
 !src
 !src/*.js
+!tests
+!tests/*.js
 !.gitignore
+!index.html
+!karma.conf.js
