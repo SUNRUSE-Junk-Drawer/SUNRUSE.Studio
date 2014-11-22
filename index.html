@@ -7,16 +7,13 @@
         <script src="src/projectController.js"></script>
         <script src="src/dialog.js"></script>
         <script src="src/history.js"></script>
+        <link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/dialog.css">
     </head>
-    <body ng-app="sunruseStudio">
-        <div ng-controller="projectController">
+    <body ng-app="sunruseStudio" ng-controller="projectController">
+        <div>
             <h2>Untitled Project</h2>
-            <div ng-show="dialog.isVisible">
-                <h3>Modal dialog</h3>
-                <h4>{{dialog.title}}</h4>
-                <p>{{dialog.message}}</p>
-                <button ng-repeat="button in dialog.buttons" ng-click="button.click();">{{button.label}}</button>
-            </div>
             <h3>History</h3>
             <button ng-click="history.undo();" ng-disabled="!history.canUndo()">Undo</button>
             <button ng-click="history.redo();" ng-disabled="!history.canRedo()">Redo</button>
@@ -27,5 +24,13 @@
             </div>
             <button ng-click="newTrack();">New Track</button>
         </div>
+        <div ng-show="dialog.isVisible" id="dialogShade"></div>
+        <div ng-show="dialog.isVisible" id="dialog">
+            <div id="dialogTitle">{{dialog.title}}</div>
+            <p id="dialogMessage">{{dialog.message}}</p>
+            <div id="dialogButtonBar">
+                <button class="dialogButton" ng-repeat="button in dialog.buttons" ng-click="button.click();">{{button.label}}</button>
+            </div>
+        </div>        
     </body>
 </html>

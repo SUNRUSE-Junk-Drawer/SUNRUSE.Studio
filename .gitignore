@@ -7,3 +7,5 @@
 !.gitignore
 !index.html
 !karma.conf.js
+!css
+!css/*.css
