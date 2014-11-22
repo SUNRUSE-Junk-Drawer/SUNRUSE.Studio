@@ -6,4 +6,13 @@
     color: black;
     background: none;
     font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(#FFF, #EEE);
 }

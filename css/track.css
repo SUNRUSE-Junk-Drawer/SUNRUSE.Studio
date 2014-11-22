@@ -1,0 +1,52 @@
+.track {
+}
+
+.trackTitle {
+    font-size: 16px;
+    font-weight: bold;
+    width: 128px;
+    padding-left: 4px;
+}
+
+.trackButton {
+    border-left: 1px solid black;
+    line-height: 12px;
+    padding: 2px;
+    padding-right: 0;
+}
+
+.trackTimeline{
+    position: relative;
+    min-width: 512px;
+    height: 64px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+    background: repeating-linear-gradient(to right,
+        #BBB, #FFF 1px, #FFF 15px, #DDD 16px,
+        #FFF 17px, #FFF 31px, #DDD 32px,
+        #FFF 33px, #FFF 47px, #DDD 48px,
+        #FFF 49px, #FFF 63px, #DDD
+    );
+    /* Seems to be necessary to prevent large blocks appearing in the gradient
+    on Chromium-based browsers.  No idea why. */
+    background-size: 64px;
+}
+
+.loop {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    box-shadow: inset 0px 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+.loopRepeat {
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+}
+
+.loopRepeat:not(:first-child){
+    margin-left: -1px;
+    border-left: 2px solid #CCC;
+}

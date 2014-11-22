@@ -1,5 +1,7 @@
+<!DOCTYPE html> 
 <html>
     <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
         <title>SUNRUSE.Studio</title>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
         <script src="src/sunruseStudio.js"></script>
@@ -10,6 +12,7 @@
         <link href='http://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/dialog.css">
+        <link rel="stylesheet" href="css/track.css">
     </head>
     <body ng-app="sunruseStudio" ng-controller="projectController">
         <div>
@@ -18,9 +21,18 @@
             <button ng-click="history.undo();" ng-disabled="!history.canUndo()">Undo</button>
             <button ng-click="history.redo();" ng-disabled="!history.canRedo()">Redo</button>
             <h3>Tracks</h3>
-            <div ng-repeat="track in projectValue.tracks">
-                Track
-                <button ng-click="deleteTrack(track);">Delete Track</button>
+            <div class="track" ng-repeat="track in projectValue.tracks">
+                <input class="trackTitle" value="Untitled Track"></input>
+                <button class="trackButton" ng-click="deleteTrack(track);">delete</button>
+                <button class="trackButton">clone</button>
+                <button class="trackButton">mute</button>
+                <button class="trackButton">solo</button>
+                <div class="trackTimeline">
+                    <div class="loop" style="left: 64px; width: 128px;">
+                        <div class="loopRepeat"></div>
+                        <div class="loopRepeat" style="left: 32px;"></div>
+                    </div>
+                </div>
             </div>
             <button ng-click="newTrack();">New Track</button>
         </div>
@@ -31,6 +43,6 @@
             <div id="dialogButtonBar">
                 <button class="dialogButton" ng-repeat="button in dialog.buttons" ng-click="button.click();">{{button.label}}</button>
             </div>
-        </div>        
+        </div>    
     </body>
 </html>
