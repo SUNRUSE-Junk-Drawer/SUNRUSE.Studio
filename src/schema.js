@@ -11,8 +11,9 @@
  * The tempo of the project, in beats per minute.  Should be greater than zero.
  * @member {Integer} tempo
  * @memberOf ProjectSchema.Project
+ */
 /**
- * @member {Track} tracks
+ * @member {ProjectSchema.Track[]} tracks
  * @memberOf ProjectSchema.Project
  */ 
 /** 
@@ -24,7 +25,7 @@
 /**
  * The {@link ProjectSchema.Loop}s this {@link ProjectSchema.Track} contains; 
  * these should not overlap when repeats are taken into account.
- * @member {Loop} loops
+ * @member {ProjectSchema.Loop[]} loops
  * @memberOf ProjectSchema.Track
  */
 /**
@@ -56,7 +57,7 @@
  * Repeated during playback the number of times specified by repeats.  Notes 
  * should not begin before the start of the {@link ProjectSchema.Loop}, not on 
  * or after the end; though they may extend beyond the end.
- * @member {Note} notes
+ * @member {ProjectSchema.Note[]} notes
  * @memberOf ProjectSchema.Loop
  */
 /**
