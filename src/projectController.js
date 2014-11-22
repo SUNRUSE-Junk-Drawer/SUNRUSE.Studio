@@ -1,5 +1,5 @@
 angular.module('sunruseStudio')
-.controller('projectController', function($scope, projectValue){
+.controller('projectController', function($scope, projectValue, dialog, history){
     
     /**
      * The controller used when overviewing {@link projectValue} as a whole.
@@ -14,13 +14,32 @@ angular.module('sunruseStudio')
     $scope.projectValue = projectValue;
     
     /**
+     * A reference to {@link dialog}, for data binding.
+     * @member {dialog} dialog
+     * @memberOf projectController
+     */    
+    $scope.dialog = dialog;
+    
+    /**
+     * A reference to {@link history}, for data binding.
+     * @member {history} history
+     * @memberOf projectController
+     */    
+    $scope.history = history;    
+    
+    /**
      * Adds a new, empty {@link ProjectSchema.Track} to {@link projectValue}.
      * @function newTrack
      * @memberOf projectController
      */
     $scope.newTrack = function(){
-        projectValue.tracks.push({
+        var track = {
             loops: []
+        };
+        history.addStep(function(){
+            projectValue.tracks.push(track);
+        }, function(){
+            projectValue.tracks.splice(projectValue.tracks.length - 1, 1);
         });
     };
     
@@ -32,7 +51,11 @@ angular.module('sunruseStudio')
      * delete.
      */    
     $scope.deleteTrack = function(track){
-        projectValue.tracks.splice(projectValue.tracks.indexOf(track), 1);
+        var index = projectValue.tracks.indexOf(track);
+        history.addStep(function(){
+            projectValue.tracks.splice(index, 1);
+        }, function(){
+            projectValue.tracks.splice(index, 0, track);
+        });        
     };
-    
 });
