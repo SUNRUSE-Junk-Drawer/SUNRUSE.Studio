@@ -1,0 +1,5 @@
+*
+!LICENSE
+!src
+!src/*.js
+!.gitignore
