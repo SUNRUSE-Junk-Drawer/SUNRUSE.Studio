@@ -17,6 +17,102 @@ describe('history', function(){
             expect(_history.canRedo()).toBeFalsy();
         });
     });
+    describe('clear', function(){
+        it('does nothing if no actions have been taken', function(){
+            _history.clear();
+        });
+        it('prevents further undo if undo steps were available', function(){
+            _do = jasmine.createSpy('do');
+            undo = jasmine.createSpy('undo');            
+            _history.addStep(_do, undo);
+            _do.calls.reset();
+            
+            _history.clear();
+            
+            expect(_history.canUndo()).toBeFalsy();
+            expect(_history.canRedo()).toBeFalsy();
+            expect(_do).not.toHaveBeenCalled();
+            expect(undo).not.toHaveBeenCalled();
+        });
+        it('prevents further redo if redo steps were available', function(){
+            _do = jasmine.createSpy('do');
+            undo = jasmine.createSpy('undo');            
+            _history.addStep(_do, undo);
+            _history.undo();
+            _do.calls.reset();
+            undo.calls.reset();
+            
+            _history.clear();
+            
+            expect(_history.canUndo()).toBeFalsy();
+            expect(_history.canRedo()).toBeFalsy();            
+            expect(_do).not.toHaveBeenCalled();
+            expect(undo).not.toHaveBeenCalled();
+        });  
+        it('allows adding new steps after clearing', function(){
+            _do = jasmine.createSpy('do');
+            undo = jasmine.createSpy('undo');            
+            _history.addStep(_do, undo);
+            _history.undo();
+            _do.calls.reset();
+            undo.calls.reset();
+            _history.clear();
+            newDo = jasmine.createSpy('newDo');
+            newUndo = jasmine.createSpy('newUndo');
+            _history.addStep(newDo, newUndo);
+            
+            expect(_history.canUndo()).toBeTruthy();
+            expect(_history.canRedo()).toBeFalsy();            
+            expect(_do).not.toHaveBeenCalled();
+            expect(undo).not.toHaveBeenCalled();  
+            expect(newDo).toHaveBeenCalled();
+            expect(newUndo).not.toHaveBeenCalled();
+        });
+        it('allows undoing steps added after clearing', function(){
+            _do = jasmine.createSpy('do');
+            undo = jasmine.createSpy('undo');            
+            _history.addStep(_do, undo);
+            _history.undo();
+            _do.calls.reset();
+            undo.calls.reset();
+            _history.clear();
+            newDo = jasmine.createSpy('newDo');
+            newUndo = jasmine.createSpy('newUndo');
+            _history.addStep(newDo, newUndo);
+            newDo.calls.reset();
+            _history.undo();
+            
+            expect(_history.canUndo()).toBeFalsy();
+            expect(_history.canRedo()).toBeTruthy();            
+            expect(_do).not.toHaveBeenCalled();
+            expect(undo).not.toHaveBeenCalled();  
+            expect(newDo).not.toHaveBeenCalled(); 
+            expect(newUndo).toHaveBeenCalled();
+        });
+        it('allows redoing steps added after clearing', function(){
+            _do = jasmine.createSpy('do');
+            undo = jasmine.createSpy('undo');            
+            _history.addStep(_do, undo);
+            _history.undo();
+            _do.calls.reset();
+            undo.calls.reset();
+            _history.clear();
+            newDo = jasmine.createSpy('newDo');
+            newUndo = jasmine.createSpy('newUndo');
+            _history.addStep(newDo, newUndo);
+            newDo.calls.reset();
+            _history.undo();
+            newUndo.calls.reset();
+            _history.redo();            
+            
+            expect(_history.canUndo()).toBeTruthy();
+            expect(_history.canRedo()).toBeFalsy();            
+            expect(_do).not.toHaveBeenCalled();
+            expect(undo).not.toHaveBeenCalled();  
+            expect(newDo).toHaveBeenCalled();    
+            expect(newUndo).not.toHaveBeenCalled();
+        });        
+    });
     describe('after adding a step', function(){
         var _do, undo;
         beforeEach(function(){
