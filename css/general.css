@@ -14,5 +14,9 @@ html {
 }
 
 body {
-    background: linear-gradient(#FFF, #EEE);
+    background-color: #CCC;
+    background-image: linear-gradient(#FFF, #CCC);
+    background-repeat: no-repeat;
+    margin-left: 4px;
+    margin-right: 4px;
 }

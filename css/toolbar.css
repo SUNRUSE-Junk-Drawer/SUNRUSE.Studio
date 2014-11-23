@@ -1,0 +1,35 @@
+#toolbar {
+    margin-right: -4px;
+    margin-left: -4px;
+    margin-bottom: 2px;
+    padding: 4px;
+    padding-left: 8px;
+    background: white;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+#breadcrumb > * {
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: -4px;
+    padding-right: 4px;
+}
+
+#breadcrumb > *:not(:last-child)::after {
+    content: " >";
+}
+
+.group > button {
+    border-left: 1px solid #AAA;
+    line-height: 12px;
+    padding: 4px;
+    padding-right: 2px;    
+}
+
+.group > button:first-child {
+    border-left-color: #000;
+}
+
+button:disabled{
+    color: #AAA;
+}

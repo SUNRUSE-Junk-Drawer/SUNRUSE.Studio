@@ -13,14 +13,29 @@
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/dialog.css">
         <link rel="stylesheet" href="css/track.css">
+        <link rel="stylesheet" href="css/toolbar.css">
     </head>
     <body ng-app="sunruseStudio" ng-controller="projectController">
         <div>
-            <h2>Untitled Project</h2>
-            <h3>History</h3>
-            <button ng-click="history.undo();" ng-disabled="!history.canUndo()">Undo</button>
-            <button ng-click="history.redo();" ng-disabled="!history.canRedo()">Redo</button>
-            <h3>Tracks</h3>
+            <div id="toolbar">
+                <span id="breadcrumb">
+                    <button>Untitled Project</button>
+                    <button>Untitled Track</button>
+                </span>
+                <span class="group">
+                    <button>new</button>
+                    <button>open</button>
+                    <button>save</button>
+                    <button>save as</button>
+                </span>
+                <span class="group">
+                    <button ng-click="history.undo();" ng-disabled="!history.canUndo()">undo</button>
+                    <button ng-click="history.redo();" ng-disabled="!history.canRedo()">redo</button>
+                </span>
+                <span class="group">
+                    <button>play</button>
+                </span>
+            </div>
             <div class="track" ng-repeat="track in projectValue.tracks">
                 <input class="trackTitle" value="Untitled Track"></input>
                 <button class="trackButton" ng-click="deleteTrack(track);">delete</button>
@@ -34,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            <button ng-click="newTrack();">New Track</button>
+            <button ng-click="newTrack();" id="newTrack">New Track</button>
         </div>
         <div ng-show="dialog.isVisible" id="dialogShade"></div>
         <div ng-show="dialog.isVisible" id="dialog">
